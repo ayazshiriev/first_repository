@@ -9,24 +9,24 @@ ISP, BR-RTR, HQ-RTR:
 echo “net.ipv4.ip_forward=1” >> /etc/sysctl.conf 
 sysctl -p
 
-Имя устройства        IP-адрес 				                       Шлюз по умолчанию 
-ISP 	                ens33: DHCP         			             ------
-		                	ens34: 172.16.4.1 /28 
-			                ens35: 172.16.5.1 /28 
+Имя устройства            IP-адрес 				                     Шлюз по умолчанию 
+ISP 	                  ens33: DHCP         			             ------
+		                  ens34: 172.16.4.1 /28 
+			              ens35: 172.16.5.1 /28 
 	 
 HQ-RTR 			          ens33: 172.16.4.2/28 			             172.16.4.1
-			                ens34.vlan100: 192.168.100.1/26 
-			                ens34.vlan200: 192.168.200.1/28 
-			                ens34.vlan999: 192.168.99.1/29 	
+			              ens34.vlan100: 192.168.100.1/26 
+			              ens34.vlan200: 192.168.200.1/28 
+			              ens34.vlan999: 192.168.99.1/29 	
 	
-BR-RTR 			          ens33: 172.16.5.2/28     		           172.16.5.1
+BR-RTR 			          ens33: 172.16.5.2/28     		             172.16.5.1
 		                  ens34: 172.30.100.1/27
  	
-HQ-SRV 			          ens33.vlan100: 192.168.100.10/26       192.168.100.1
+HQ-SRV 			          ens33.vlan100: 192.168.100.10/26           192.168.100.1
  
-BR-SRV 			          ens33: 172.30.100.10/27 	             172.30.100.1
+BR-SRV 			          ens33: 172.30.100.10/27 	                 172.30.100.1
  
-HQ-CLI 			          ens33.vlan200: DHCP 	                 DHCP 
+HQ-CLI 			          ens33.vlan200: DHCP 	                     DHCP 
 
 --- ОБНОВЛЯЕМ ИНТЕРФЕЙСЫ ОБЯЗАТЕЛЬНО
 --- Динамическая сетевая трансляция
@@ -84,14 +84,14 @@ ssh -l sshuser 192.168.100.10 -p 2026 ------ HQ-RTR
 Выбираем IP-Туннель
 
 HQ-RTR  			                     BR-RTR
-Имя профиля tun0 		               Имя профиля tun0
-Устройство tun0			               Устройство tun0
+Имя профиля tun0 		                 Имя профиля tun0
+Устройство tun0			                 Устройство tun0
 Режим GRE			                     Режим GRE
-Родительский ens33	               Родительский ens33
-Локальный IP 172.16.4.2		         Локальный IP 172.16.5.2
-Удаленный IP 172.16.5.2		         Удаленный IP 172.16.4.2
-Конфигурация IPv4 (Вручную)        Конфигурация IPv4 (Вручную)
-Адреса 10.10.10.1/30		           Адреса 10.10.10.2/30
+Родительский ens33	                     Родительский ens33
+Локальный IP 172.16.4.2		             Локальный IP 172.16.5.2
+Удаленный IP 172.16.5.2		             Удаленный IP 172.16.4.2
+Конфигурация IPv4 (Вручную)              Конфигурация IPv4 (Вручную)
+Адреса 10.10.10.1/30		             Адреса 10.10.10.2/30
 
 HQ-RTR, BR-RTR:
 nmcli connection modify tun0 ip-tunnel.ttl 64
@@ -116,8 +116,8 @@ network 192.168.200.0/28 area 0        network 10.10.10.0/30 area 0
 network 192.168.99.0/29 area 0
 network 10.10.10.0/30 area 0
 ospf router-id 172.16.4.2  	           ospf router-id 172.16.5.2
-passive-interface ens33 	             passive-interface ens33
-passive-interface ens34 	             passive-interface ens34
+passive-interface ens33 	           passive-interface ens33
+passive-interface ens34 	           passive-interface ens34
 passive-interface ens35
 
 area 0 authentication
